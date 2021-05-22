@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="row" style="margin-top: 10%;">
+    <div class="col-md-5">
+        <div class="card card-body">            
+            <form action="/añadir" method="POST">
+             <div class="card ard-body">
+                <div class="form-group">
+                    <input type="text" name="fullname" placeholder="Nombre completo" class="form-control">
+                   </div>        
+                   <div class="form-group">
+                     <input type="text" name="phone" placeholder="Teléfono" class="form-control">
+                   </div>    
+                   <div class="form-group">   
+                       <input type="email" name="email" placeholder="Email" class="form-control">
+                   </div> 
+                   
+
+             </div>
+            
+                
+                <button type="submit" class="btn btn-success">Añadir</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">        
+        <table class="table table-stripped table-bordered">
+            <thead>
+                <tr>
+                    <td>Nombre Completo</td>
+                    <td>Teléfono</td>
+                    <td>Email</td>
+                    <td>Operations</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                   <td>{{usuario.1}}</td> 
+                   <td>{{usuario.2}}</td> 
+                   <td>{{usuario.3}}</td> 
+                   <td>
+                       <a href="/editar/{{usuario.0}}" class="btn btn-warning">Editar</a>
+                       <a href="eliminar/{{usuario.0}}" class="btn btn-danger">Eliminar</a>
+                   </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>    
+        </div></div>
+    
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{%endblock%}
